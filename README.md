@@ -1,4 +1,4 @@
-# [React Reduction Assignment- Extending Free Admin Template Built with React and Bootstrap4](https://reduction-admin.github.io/react-reduction/)
+# [React Reduction Assignment - Extending Free Admin Template Built with React and Bootstrap4](https://reduction-admin.github.io/react-reduction/)
 
 
 
