@@ -8,6 +8,7 @@ import {
     CardText,
     Col,
     Row,
+    Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import CardDescription from '../components/CardDescription';
@@ -58,7 +59,11 @@ const SearchPage = (props) => {
                :
                <Row>
                    <CardBody className="d-flex flex-column justify-content-start align-items-start">
-                        <CardText>No Content</CardText>
+                        {
+                            !props.error 
+                                ? <CardText>No Content</CardText> 
+                                : <Alert color="secondary">{props.errorMessage}</Alert>
+                        }
                     </CardBody>
                </Row>
 
@@ -69,7 +74,9 @@ const SearchPage = (props) => {
 }
 
 const mapStateToProps = state => ({
-    peers: state.peers
+    peers: state.peers,
+    error: state.error,
+    errorMessage: state.errorMessage
 });
 
 export default connect(mapStateToProps)(SearchPage);

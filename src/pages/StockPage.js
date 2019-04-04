@@ -4,6 +4,7 @@ import { Card, CardBody, CardHeader, Col, Row, Table, Form, Label, Input, FormGr
 import { connect } from 'react-redux';
 import { getStockPrice } from '../store/actions';
 import { bindActionCreators } from 'redux';
+import Loader from '../components/Loader';
 
 const InputOptions = ({periods}) => {
     return periods.map((e, i) => <option key={i}>{e}</option>)
@@ -62,25 +63,30 @@ class StockPage extends PureComponent {
 
                                 <Col>
                                     <Card body>
-                                    <Table dark>
-                                        <thead>
-                                            <tr>
-                                                {
-                                                    this.state.tabHeaders.map((th, i) => <th key={i}>{ th }</th>)
-                                                }
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                this.props.stockPrice.map((tr, i) => (
-                                                    <tr key={i}>
-                                                        <td>{ tr.date }</td>
-                                                        <td>{ tr.close }</td>
+                                    {
+                                        this.props.stockPrice.length ? 
+                                            <Table dark>
+                                                <thead>
+                                                    <tr>
+                                                        {
+                                                            this.state.tabHeaders.map((th, i) => <th key={i}>{ th }</th>)
+                                                        }
                                                     </tr>
-                                                ))
-                                            }
-                                        </tbody>
-                                    </Table>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        this.props.stockPrice.map((tr, i) => (
+                                                            <tr key={i}>
+                                                                <td>{ tr.date }</td>
+                                                                <td>{ tr.close }</td>
+                                                            </tr>
+                                                        ))
+                                                    }
+                                                </tbody>
+                                            </Table>
+                                            :
+                                            <Loader />
+                                        }
                                     </Card>
                                 </Col>
                             </Row>

@@ -13,7 +13,7 @@ export const getPeers = inputQuote => {
             })
             .catch(err => {
                 dispatch({
-                    type: API_CALL_ERROR, payload: true
+                    type: API_CALL_ERROR, payload: { error: true, errorMessage: err.message }
                 })
             })
     }
@@ -29,7 +29,7 @@ export const getCompInfo = stockQuote => {
             })
             .catch(err => {
                 dispatch({
-                    type: API_CALL_ERROR, payload: true
+                    type: API_CALL_ERROR, payload: { error: true, errorMessage: err.message }
                 })
             })
     }
@@ -45,11 +45,18 @@ export const getStockPrice = (stockQuote, period) => {
             })
             .catch(err => {
                 dispatch({
-                    type: API_CALL_ERROR, payload: true
+                    type: API_CALL_ERROR, payload: { error: true, errorMessage: err.message }
                 })
             })
     }
 };
+
+const handleErrors = response => {
+    if(!response.ok) {
+        throw new Error("No Data found.")
+    }
+    return response.json();
+}
 const apiCall = (url) => {
-    return fetch(url).then(res => res.json())
+    return fetch(url).then(handleErrors);
 }

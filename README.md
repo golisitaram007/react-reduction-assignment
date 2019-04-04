@@ -14,7 +14,3 @@ You can check out [live preview](https://reduction-admin.github.io/react-reducti
 3.  Run: `npm install` or `yarn install`
 4.  After install, run: `npm run start` or `yarn start`
 5.  It will open your browser(http://localhost:3000)
-
-## Assignment Tasks
-
-Route to Search page by (http://localhost:3000/search)

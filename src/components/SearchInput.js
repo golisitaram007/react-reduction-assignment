@@ -1,12 +1,17 @@
 import React from 'react';
 import { MdSearch } from 'react-icons/md';
 import { Form, Input } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPeers } from '../store/actions';
 import { bindActionCreators } from 'redux';
 
 const handleFormChange = (input, props) => {
-  input !== "" && props.getPeers(input);
+  if( input !== "" ) {
+    props.history.push('/search');
+    props.getPeers(input);
+  }
+  return;
 }
 
 const handleSearchBtnClick = (e, props) => {
@@ -37,7 +42,8 @@ const SearchInput = (props) => {
   );
 };
 
+const withRouterComp = withRouter(SearchInput)
 
-const mapDispatchToProps = dispatch => bindActionCreators({getPeers}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getPeers }, dispatch);
   
-export default connect(null, mapDispatchToProps)(SearchInput);
+export default connect(null, mapDispatchToProps)(withRouterComp);

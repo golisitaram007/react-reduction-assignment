@@ -1,11 +1,12 @@
 import { GET_PEERS, GET_COMP_INFO, GET_STOCK_PRICE, API_CALL_ERROR } from './actions';
 
 const initState = {
-    searchInput: '',
     peers: [],
     companies: {},
     periods: ['1m', '3m', '6m'],
-    stockPrice: []
+    stockPrice: [],
+    error: false,
+    errorMessage: ''
 };
 
 const searchReducer = (state = initState, { type, payload }) => {
@@ -27,7 +28,8 @@ const searchReducer = (state = initState, { type, payload }) => {
         case API_CALL_ERROR:
             return {
                 ...state,
-                error: payload
+                ...initState,
+                ...payload
             }
         default:
             return state
